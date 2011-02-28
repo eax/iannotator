@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package arsivci.logic;
 
 import arsivci.DocumentEvent;
@@ -42,6 +39,7 @@ public class Document2D extends Component implements MouseListener, MouseMotionL
         doc = new Document(filename);
         this.img = img;
         prev = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
+        prev.setData(img.getData());
         prevtrans = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
         prevtrans.setData(img.getData());
         g = this.img.createGraphics();
@@ -101,7 +99,6 @@ public class Document2D extends Component implements MouseListener, MouseMotionL
         int y = me.getY();
         int idx = hitOnPolygon(x, y);
         if (idx > -1) {
-            
             Polygon p = doc.translations.get(idx).getPoly();
             PolygonShape _tmp = new PolygonShape();
             g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
@@ -113,7 +110,6 @@ public class Document2D extends Component implements MouseListener, MouseMotionL
             repaint();
             me.consume();
             return;
-
         }
         else if(doc.translations.size() > 0)
             img.setData(prev.getData());
